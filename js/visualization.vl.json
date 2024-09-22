@@ -1,0 +1,44 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Population Growth 2023-2024",
+  "width": 800,
+  "height": 400,
+  "projection": {"type": "equirectangular"},
+  "data": {
+    "url": "https://raw.githubusercontent.com/patjoey/Maps/refs/heads/main/js/output.json",
+    "format": {"type": "topojson", "feature": "australia-with-states_782"}
+  },
+  "transform": [
+    {
+      "lookup": "properties.STATE_NAME",
+      "from": {
+        "data": {
+          "url": "https://raw.githubusercontent.com/patjoey/Maps/refs/heads/main/data/population.csv"
+        },
+        "key": "State",
+        "fields": ["ChangePercent"]
+      }
+    }
+  ],
+  "mark": {"type": "geoshape"},
+  "encoding": {
+    "color": {
+      "field": "ChangePercent",
+      "title": "Percentage Growth",
+      "scale": {
+        "type": "threshold",
+        "domain": [1, 1.6, 2.1, 2.8],
+        "range": ["#b5f3b4", "#6ce76a", "#2fdd2c", "#1da71b", "#136911"]
+      }
+    },
+    "tooltip": [
+      {"field": "properties.STATE_NAME", "type": "nominal", "title": "State"},
+      {
+        "field": "ChangePercent",
+        "type": "quantitative",
+        "title": "Percentage Growth"
+      }
+    ]
+  },
+  "config": {}
+}
