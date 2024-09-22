@@ -27,18 +27,13 @@
       "title": "Percentage Growth",
       "scale": {
         "type": "threshold",
-        "domain": [1, 1.6, 2.1, 2.8],
-        "range": ["#b5f3b4", "#6ce76a", "#2fdd2c", "#1da71b", "#136911"]
+        "domain": [ 1, 1.6, 2.1, 2.8],
+        "range": ["#b5f3b4","#6ce76a", "#2fdd2c", "#1da71b", "#136911"]
       }
     },
     "tooltip": [
       {"field": "properties.STATE_NAME", "type": "nominal", "title": "State"},
-      {
-        "field": "ChangePercent",
-        "type": "quantitative",
-        "title": "Percentage Growth"
-      }
+      {"field": "ChangePercent", "type": "quantitative", "title": "Percentage Growth"}
     ]
-  },
-  "config": {}
+  }
 }
