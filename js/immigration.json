@@ -1,0 +1,36 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 500,
+  "height": 250,
+  "description": "A scatterplot showing horsepower and miles per gallons for various cars.",
+  "data": {"url": "https://raw.githubusercontent.com/patjoey/Maps/refs/heads/main/data/immigration.csv"},
+  "mark": "point",
+  "params": [
+    {
+      "name": "Population_Above",
+      "value": 0,
+      "bind": {
+        "input": "range",
+        "min": 0,
+        "max": 20000,
+        "step": 10,
+        "name": "Minimum Immigration: "
+      }
+    }],
+    "transform": [
+    {"filter": "datum.immigration > Population_Above"},
+    {"filter": "datum.immigration > 1000"}
+  ],
+  "encoding": {
+    "x": {
+      "field": "Distance",
+      "type": "quantitative",
+      "title": "Distance",
+      "axis": {"tickCount": 7},
+      "scale": {"type": "linear", "domain": [1000, 20000]}
+    },
+    "y": {"field": "immigration", "type": "quantitative",
+    "title": "Immigration",
+    }
+  }
+}
