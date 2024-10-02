@@ -1,0 +1,78 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 600,
+    "height": 300,
+    "description": "A scatterplot showing horsepower and miles per gallons for various cars.",
+    "data": {"url": "https://raw.githubusercontent.com/patjoey/Maps/refs/heads/main/data/immigration.csv"},
+    "params": [
+      {
+        "name": "Population_Above",
+        "value": 0,
+        "bind": {
+          "input": "range",
+          "min": 100,
+          "max": 25000,
+          "step": 10,
+          "name": "Minimum Immigration Count: "
+        }
+      }],
+    "transform": [
+    {"filter": "datum.immigration > Population_Above"},
+    {"filter": "datum.immigration > 1000"}
+    ],
+    "encoding": {
+        "x": {
+          "field": "Distance",
+          "type": "quantitative",
+          "title": "Distance from Australia (km)",
+          "axis": {"tickCount": 7},
+          "scale": {"type": "linear", "domain": [1000, 20000]}
+        },
+        "y": {"field": "immigration", "type": "quantitative",
+        "title": "Immigration (People)"
+        }
+      },
+    "layer":[
+      {
+      "mark": "point",
+        "encoding": {
+          "x": {
+            "field": "Distance",
+            "type": "quantitative",
+            "title": "Distance from Australia (km)",
+            "axis": {"tickCount": 7},
+            "scale": {"type": "linear", "domain": [1000, 20000]}
+          },
+          "y": {"field": "immigration", "type": "quantitative",
+          "title": "Immigration (People)"
+          },
+        
+          "tooltip":[
+            {"field": "Country", "type": "nominal"},
+            {"field": "immigration", "type": "quantitative","format": ",", "title":"Immigration"}
+          ]
+        }
+      },
+      {
+        "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 12,
+        "fontSize": 11.5,
+        "fontStyle": "italic"
+        },
+        "encoding": {
+          "text": {"field": "Country", "type": "nominal"},
+          "opacity": {
+            "condition": {
+              "test": "datum['Country'] == 'Nepal' || datum['Country'] == 'Philippines' || datum['Country'] == 'India'",
+              "value": 1
+            },
+            "value": 0
+          }
+        }
+      }
+    ]
+  }
+  
